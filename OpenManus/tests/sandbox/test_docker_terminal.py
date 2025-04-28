@@ -4,7 +4,7 @@ import docker
 import pytest
 import pytest_asyncio
 
-from app.sandbox.core.terminal import AsyncDockerizedTerminal
+from OpenManus.app.sandbox.core.terminal import AsyncDockerizedTerminal
 
 
 @pytest.fixture(scope="module")

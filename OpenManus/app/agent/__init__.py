@@ -1,9 +1,9 @@
-from app.agent.base import BaseAgent
-from app.agent.browser import BrowserAgent
-from app.agent.mcp import MCPAgent
-from app.agent.react import ReActAgent
-from app.agent.swe import SWEAgent
-from app.agent.toolcall import ToolCallAgent
+from OpenManus.app.agent.base import BaseAgent
+from OpenManus.app.agent.browser import BrowserAgent
+from OpenManus.app.agent.mcp import MCPAgent
+from OpenManus.app.agent.react import ReActAgent
+from OpenManus.app.agent.swe import SWEAgent
+from OpenManus.app.agent.toolcall import ToolCallAgent
 
 
 __all__ = [

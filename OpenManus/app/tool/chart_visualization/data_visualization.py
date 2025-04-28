@@ -6,10 +6,10 @@ from typing import Any, Hashable
 import pandas as pd
 from pydantic import Field, model_validator
 
-from app.config import config
-from app.llm import LLM
-from app.logger import logger
-from app.tool.base import BaseTool
+from OpenManus.app.config import config
+from OpenManus.app.llm import LLM
+from OpenManus.app.logger import logger
+from OpenManus.app.tool.base import BaseTool
 
 
 class DataVisualization(BaseTool):

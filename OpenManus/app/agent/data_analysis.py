@@ -1,12 +1,12 @@
 from pydantic import Field
 
-from app.agent.toolcall import ToolCallAgent
-from app.config import config
-from app.prompt.visualization import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from app.tool import Terminate, ToolCollection
-from app.tool.chart_visualization.chart_prepare import VisualizationPrepare
-from app.tool.chart_visualization.data_visualization import DataVisualization
-from app.tool.chart_visualization.python_execute import NormalPythonExecute
+from OpenManus.app.agent.toolcall import ToolCallAgent
+from OpenManus.app.config import config
+from OpenManus.app.prompt.visualization import NEXT_STEP_PROMPT, SYSTEM_PROMPT
+from OpenManus.app.tool import Terminate, ToolCollection
+from OpenManus.app.tool.chart_visualization.chart_prepare import VisualizationPrepare
+from OpenManus.app.tool.chart_visualization.data_visualization import DataVisualization
+from OpenManus.app.tool.chart_visualization.python_execute import NormalPythonExecute
 
 
 class DataAnalysis(ToolCallAgent):

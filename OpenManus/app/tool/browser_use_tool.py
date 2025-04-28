@@ -10,10 +10,10 @@ from browser_use.dom.service import DomService
 from pydantic import Field, field_validator
 from pydantic_core.core_schema import ValidationInfo
 
-from app.config import config
-from app.llm import LLM
-from app.tool.base import BaseTool, ToolResult
-from app.tool.web_search import WebSearch
+from OpenManus.app.config import config
+from OpenManus.app.llm import LLM
+from OpenManus.app.tool.base import BaseTool, ToolResult
+from OpenManus.app.tool.web_search import WebSearch
 
 
 _BROWSER_DESCRIPTION = """\

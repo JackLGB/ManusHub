@@ -1,5 +1,5 @@
-from app.config import config
-from app.tool.python_execute import PythonExecute
+from OpenManus.app.config import config
+from OpenManus.app.tool.python_execute import PythonExecute
 
 
 class NormalPythonExecute(PythonExecute):

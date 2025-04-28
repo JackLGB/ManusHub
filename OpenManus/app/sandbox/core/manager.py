@@ -6,9 +6,9 @@ from typing import Dict, Optional, Set
 import docker
 from docker.errors import APIError, ImageNotFound
 
-from app.config import SandboxSettings
-from app.logger import logger
-from app.sandbox.core.sandbox import DockerSandbox
+from OpenManus.app.config import SandboxSettings
+from OpenManus.app.logger import logger
+from OpenManus.app.sandbox.core.sandbox import DockerSandbox
 
 
 class SandboxManager:

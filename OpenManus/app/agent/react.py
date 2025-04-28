@@ -3,9 +3,9 @@ from typing import Optional
 
 from pydantic import Field
 
-from app.agent.base import BaseAgent
-from app.llm import LLM
-from app.schema import AgentState, Memory
+from OpenManus.app.agent.base import BaseAgent
+from OpenManus.app.llm import LLM
+from OpenManus.app.schema import AgentState, Memory
 
 
 class ReActAgent(BaseAgent, ABC):

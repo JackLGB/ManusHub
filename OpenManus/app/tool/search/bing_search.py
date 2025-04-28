@@ -3,8 +3,8 @@ from typing import List, Optional, Tuple
 import requests
 from bs4 import BeautifulSoup
 
-from app.logger import logger
-from app.tool.search.base import SearchItem, WebSearchEngine
+from OpenManus.app.logger import logger
+from OpenManus.app.tool.search.base import SearchItem, WebSearchEngine
 
 
 ABSTRACT_MAX_LENGTH = 300

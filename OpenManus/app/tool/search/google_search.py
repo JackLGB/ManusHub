@@ -2,7 +2,7 @@ from typing import List
 
 from googlesearch import search
 
-from app.tool.search.base import SearchItem, WebSearchEngine
+from OpenManus.app.tool.search.base import SearchItem, WebSearchEngine
 
 
 class GoogleSearchEngine(WebSearchEngine):

@@ -4,18 +4,18 @@ Docker Sandbox Module
 Provides secure containerized execution environment with resource limits
 and isolation for running untrusted code.
 """
-from app.sandbox.client import (
+from OpenManus.app.sandbox.client import (
     BaseSandboxClient,
     LocalSandboxClient,
     create_sandbox_client,
 )
-from app.sandbox.core.exceptions import (
+from OpenManus.app.sandbox.core.exceptions import (
     SandboxError,
     SandboxResourceError,
     SandboxTimeoutError,
 )
-from app.sandbox.core.manager import SandboxManager
-from app.sandbox.core.sandbox import DockerSandbox
+from OpenManus.app.sandbox.core.manager import SandboxManager
+from OpenManus.app.sandbox.core.sandbox import DockerSandbox
 
 
 __all__ = [

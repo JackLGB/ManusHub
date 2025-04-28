@@ -18,11 +18,11 @@ from tenacity import (
     wait_random_exponential,
 )
 
-from app.bedrock import BedrockClient
-from app.config import LLMSettings, config
-from app.exceptions import TokenLimitExceeded
-from app.logger import logger  # Assuming a logger is set up in your app
-from app.schema import (
+from OpenManus.app.bedrock import BedrockClient
+from OpenManus.app.config import LLMSettings, config
+from OpenManus.app.exceptions import TokenLimitExceeded
+from OpenManus.app.logger import logger  # Assuming a logger is set up in your app
+from OpenManus.app.schema import (
     ROLE_VALUES,
     TOOL_CHOICE_TYPE,
     TOOL_CHOICE_VALUES,

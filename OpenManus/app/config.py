@@ -167,6 +167,7 @@ class Config:
     _instance = None
     _lock = threading.Lock()
     _initialized = False
+    config_path: Optional[Path] = None
 
     def __new__(cls):
         if cls._instance is None:
@@ -183,20 +184,31 @@ class Config:
                     self._load_initial_config()
                     self._initialized = True
 
-    @staticmethod
-    def _get_config_path() -> Path:
+    def reload(self, cfg_file:str):
+        root = PROJECT_ROOT
+        self.config_path = root / "config" / cfg_file
+        if not self.config_path.exists():
+            raise FileNotFoundError(f"Config file {cfg_file} not found")
+        self._initialized = False
+        self.__init__()
+
+    def _get_config_path(self):
+        if self.config_path is not None:
+            return
         root = PROJECT_ROOT
         config_path = root / "config" / "config.toml"
         if config_path.exists():
-            return config_path
+            self.config_path = config_path
+            return
         example_path = root / "config" / "config.example.toml"
         if example_path.exists():
-            return example_path
+            self.config_path = example_path
+            return
         raise FileNotFoundError("No configuration file found in config directory")
 
     def _load_config(self) -> dict:
-        config_path = self._get_config_path()
-        with config_path.open("rb") as f:
+        self._get_config_path()
+        with self.config_path.open("rb") as f:
             return tomllib.load(f)
 
     def _load_initial_config(self):

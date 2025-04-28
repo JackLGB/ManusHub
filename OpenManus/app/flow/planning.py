@@ -5,12 +5,12 @@ from typing import Dict, List, Optional, Union
 
 from pydantic import Field
 
-from app.agent.base import BaseAgent
-from app.flow.base import BaseFlow
-from app.llm import LLM
-from app.logger import logger
-from app.schema import AgentState, Message, ToolChoice
-from app.tool import PlanningTool
+from OpenManus.app.agent.base import BaseAgent
+from OpenManus.app.flow.base import BaseFlow
+from OpenManus.app.llm import LLM
+from OpenManus.app.logger import logger
+from OpenManus.app.schema import AgentState, Message, ToolChoice
+from OpenManus.app.tool import PlanningTool
 
 
 class PlanStepStatus(str, Enum):

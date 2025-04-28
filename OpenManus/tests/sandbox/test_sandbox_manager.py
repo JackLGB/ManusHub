@@ -6,7 +6,7 @@ from typing import AsyncGenerator
 import pytest
 import pytest_asyncio
 
-from app.sandbox.core.manager import SandboxManager
+from OpenManus.app.sandbox.core.manager import SandboxManager
 
 
 @pytest_asyncio.fixture(scope="function")

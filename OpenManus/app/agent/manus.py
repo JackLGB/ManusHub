@@ -2,17 +2,17 @@ from typing import Dict, List, Optional
 
 from pydantic import Field, model_validator
 
-from app.agent.browser import BrowserContextHelper
-from app.agent.toolcall import ToolCallAgent
-from app.config import config
-from app.logger import logger
-from app.prompt.manus import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from app.tool import Terminate, ToolCollection
-from app.tool.ask_human import AskHuman
-from app.tool.browser_use_tool import BrowserUseTool
-from app.tool.mcp import MCPClients, MCPClientTool
-from app.tool.python_execute import PythonExecute
-from app.tool.str_replace_editor import StrReplaceEditor
+from OpenManus.app.agent.browser import BrowserContextHelper
+from OpenManus.app.agent.toolcall import ToolCallAgent
+from OpenManus.app.config import config
+from OpenManus.app.logger import logger
+from OpenManus.app.prompt.manus import NEXT_STEP_PROMPT, SYSTEM_PROMPT
+from OpenManus.app.tool import Terminate, ToolCollection
+from OpenManus.app.tool.ask_human import AskHuman
+from OpenManus.app.tool.browser_use_tool import BrowserUseTool
+from OpenManus.app.tool.mcp import MCPClients, MCPClientTool
+from OpenManus.app.tool.python_execute import PythonExecute
+from OpenManus.app.tool.str_replace_editor import StrReplaceEditor
 
 
 class Manus(ToolCallAgent):

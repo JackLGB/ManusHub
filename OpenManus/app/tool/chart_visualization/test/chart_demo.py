@@ -1,7 +1,7 @@
 import asyncio
 
-from app.agent.data_analysis import DataAnalysis
-from app.logger import logger
+from OpenManus.app.agent.data_analysis import DataAnalysis
+from OpenManus.app.logger import logger
 
 
 prefix = "Help me generate charts and save them locally, specifically:"

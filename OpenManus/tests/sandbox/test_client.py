@@ -5,8 +5,8 @@ from typing import AsyncGenerator
 import pytest
 import pytest_asyncio
 
-from app.config import SandboxSettings
-from app.sandbox.client import LocalSandboxClient, create_sandbox_client
+from OpenManus.app.config import SandboxSettings
+from OpenManus.app.sandbox.client import LocalSandboxClient, create_sandbox_client
 
 
 @pytest_asyncio.fixture(scope="function")

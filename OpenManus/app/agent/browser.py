@@ -3,16 +3,16 @@ from typing import TYPE_CHECKING, Optional
 
 from pydantic import Field, model_validator
 
-from app.agent.toolcall import ToolCallAgent
-from app.logger import logger
-from app.prompt.browser import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from app.schema import Message, ToolChoice
-from app.tool import BrowserUseTool, Terminate, ToolCollection
+from OpenManus.app.agent.toolcall import ToolCallAgent
+from OpenManus.app.logger import logger
+from OpenManus.app.prompt.browser import NEXT_STEP_PROMPT, SYSTEM_PROMPT
+from OpenManus.app.schema import Message, ToolChoice
+from OpenManus.app.tool import BrowserUseTool, Terminate, ToolCollection
 
 
 # Avoid circular import if BrowserAgent needs BrowserContextHelper
 if TYPE_CHECKING:
-    from app.agent.base import BaseAgent  # Or wherever memory is defined
+    from OpenManus.app.agent.base import BaseAgent  # Or wherever memory is defined
 
 
 class BrowserContextHelper:

@@ -1,4 +1,4 @@
-from app.tool import BaseTool
+from OpenManus.app.tool import BaseTool
 
 
 class AskHuman(BaseTool):

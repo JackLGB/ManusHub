@@ -1,4 +1,4 @@
-from app.tool.chart_visualization.python_execute import NormalPythonExecute
+from OpenManus.app.tool.chart_visualization.python_execute import NormalPythonExecute
 
 
 class VisualizationPrepare(NormalPythonExecute):

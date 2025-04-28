@@ -1,9 +1,9 @@
 import asyncio
 import time
 
-from app.agent.manus import Manus
-from app.flow.flow_factory import FlowFactory, FlowType
-from app.logger import logger
+from OpenManus.app.agent.manus import Manus
+from OpenManus.app.flow.flow_factory import FlowFactory, FlowType
+from OpenManus.app.logger import logger
 
 
 async def run_flow():

@@ -6,9 +6,9 @@ from mcp.client.sse import sse_client
 from mcp.client.stdio import stdio_client
 from mcp.types import TextContent
 
-from app.logger import logger
-from app.tool.base import BaseTool, ToolResult
-from app.tool.tool_collection import ToolCollection
+from OpenManus.app.logger import logger
+from OpenManus.app.tool.base import BaseTool, ToolResult
+from OpenManus.app.tool.tool_collection import ToolCollection
 
 
 class MCPClientTool(BaseTool):

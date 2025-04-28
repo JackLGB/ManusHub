@@ -1,7 +1,10 @@
 import asyncio
 
-from app.agent.manus import Manus
-from app.logger import logger
+from OpenManus.app.config import config
+
+config.reload("config.example-model-ppio.toml")
+from OpenManus.app.agent.manus import Manus
+from OpenManus.app.logger import logger
 
 
 async def main():

@@ -1,8 +1,8 @@
 # tool/planning.py
 from typing import Dict, List, Literal, Optional
 
-from app.exceptions import ToolError
-from app.tool.base import BaseTool, ToolResult
+from OpenManus.app.exceptions import ToolError
+from OpenManus.app.tool.base import BaseTool, ToolResult
 
 
 _PLANNING_TOOL_DESCRIPTION = """

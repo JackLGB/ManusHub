@@ -3,9 +3,9 @@ import argparse
 import asyncio
 import sys
 
-from app.agent.mcp import MCPAgent
-from app.config import config
-from app.logger import logger
+from OpenManus.app.agent.mcp import MCPAgent
+from OpenManus.app.config import config
+from OpenManus.app.logger import logger
 
 
 class MCPRunner:
