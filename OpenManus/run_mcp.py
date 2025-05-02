@@ -88,9 +88,11 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-async def run_mcp() -> None:
+async def run_mcp(connection=None) -> None:
     """Main entry point for the MCP runner."""
     args = parse_args()
+    if connection:
+        args.connection = connection
     runner = MCPRunner()
 
     try:
@@ -113,4 +115,4 @@ async def run_mcp() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(run_mcp())
+    asyncio.run(run_mcp('sse'))

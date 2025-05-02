@@ -114,7 +114,7 @@ class MCPSettings(BaseModel):
     """Configuration for MCP (Model Context Protocol)"""
 
     server_reference: str = Field(
-        "app.mcp.server", description="Module reference for the MCP server"
+        "OpenManus.app.mcp.server", description="Module reference for the MCP server"
     )
     servers: Dict[str, MCPServerConfig] = Field(
         default_factory=dict, description="MCP server configurations"

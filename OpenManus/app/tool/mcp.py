@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.sse import sse_client
 from mcp.client.stdio import stdio_client
-from mcp.types import TextContent
+from mcp.types import TextContent, ListToolsResult
 
 from OpenManus.app.logger import logger
 from OpenManus.app.tool.base import BaseTool, ToolResult
@@ -69,7 +69,7 @@ class MCPClients(ToolCollection):
         await self._initialize_and_list_tools(server_id)
 
     async def connect_stdio(
-        self, command: str, args: List[str], server_id: str = ""
+            self, command: str, args: List[str], server_id: str = ""
     ) -> None:
         """Connect to an MCP server using stdio transport."""
         if not command:
@@ -124,6 +124,14 @@ class MCPClients(ToolCollection):
         logger.info(
             f"Connected to server {server_id} with tools: {[tool.name for tool in response.tools]}"
         )
+
+    async def list_tools(self) -> ListToolsResult:
+        """List all available tools."""
+        tools_result = ListToolsResult(tools=[])
+        for session in self.sessions.values():
+            response = await session.list_tools()
+            tools_result.tools += response.tools
+        return tools_result
 
     async def disconnect(self, server_id: str = "") -> None:
         """Disconnect from a specific MCP server or all servers if no server_id provided."""
