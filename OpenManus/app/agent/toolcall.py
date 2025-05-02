@@ -8,7 +8,8 @@ from OpenManus.app.agent.react import ReActAgent
 from OpenManus.app.exceptions import TokenLimitExceeded
 from OpenManus.app.logger import logger
 from OpenManus.app.prompt.toolcall import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from OpenManus.app.schema import TOOL_CHOICE_TYPE, AgentState, Message, ToolCall, ToolChoice
+from OpenManus.app.schema.common import TOOL_CHOICE_TYPE, AgentState, ToolCall, ToolChoice
+from OpenManus.app.schema.message import Message
 from OpenManus.app.tool import CreateChatCompletion, Terminate, ToolCollection
 
 

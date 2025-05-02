@@ -7,7 +7,9 @@ from pydantic import BaseModel, Field, model_validator
 from OpenManus.app.llm import LLM
 from OpenManus.app.logger import logger
 from OpenManus.app.sandbox.client import SANDBOX_CLIENT
-from OpenManus.app.schema import ROLE_TYPE, AgentState, Memory, Message
+from OpenManus.app.schema.common import ROLE_TYPE, AgentState
+from OpenManus.app.schema.memory import Memory
+from OpenManus.app.schema.message import Message
 
 
 class BaseAgent(BaseModel, ABC):

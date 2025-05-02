@@ -5,7 +5,8 @@ from pydantic import Field
 from OpenManus.app.agent.toolcall import ToolCallAgent
 from OpenManus.app.logger import logger
 from OpenManus.app.prompt.mcp import MULTIMEDIA_RESPONSE_PROMPT, NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from OpenManus.app.schema import AgentState, Message
+from OpenManus.app.schema.common import AgentState
+from OpenManus.app.schema.message import Message
 from OpenManus.app.tool.base import ToolResult
 from OpenManus.app.tool.mcp import MCPClients
 

@@ -6,7 +6,8 @@ from pydantic import Field, model_validator
 from OpenManus.app.agent.toolcall import ToolCallAgent
 from OpenManus.app.logger import logger
 from OpenManus.app.prompt.browser import NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from OpenManus.app.schema import Message, ToolChoice
+from OpenManus.app.schema.common import ToolChoice
+from OpenManus.app.schema.message import Message
 from OpenManus.app.tool import BrowserUseTool, Terminate, ToolCollection
 
 

@@ -5,7 +5,9 @@ from pydantic import Field
 
 from OpenManus.app.agent.base import BaseAgent
 from OpenManus.app.llm import LLM
-from OpenManus.app.schema import AgentState, Memory
+from OpenManus.app.schema.common import AgentState
+from OpenManus.app.schema.memory import Memory
+
 
 
 class ReActAgent(BaseAgent, ABC):
