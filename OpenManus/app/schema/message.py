@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 from OpenManus.app.schema.common import ToolCall, Role, ROLE_TYPE, ROLE_VALUES
 
-__all__ = ['Message']
+__all__ = ['Message', 'format_messages', 'MESSAGE_FACTORY']
 
 
 class Message(BaseModel):
@@ -111,6 +111,13 @@ class Message(BaseModel):
             **kwargs,
         )
 
+
+MESSAGE_FACTORY = {
+    Role.USER: Message.user_message,
+    Role.SYSTEM: Message.system_message,
+    Role.ASSISTANT: Message.assistant_message,
+    Role.TOOL: lambda content, **kw: Message.tool_message(content, **kw),
+}
 
 def normalize_content(content):
     if isinstance(content, str):

@@ -49,3 +49,8 @@ class ToolCall(BaseModel):
     id: str
     type: str = "function"
     function: Function
+
+class McpConnType(str, Enum):
+    """Mcp connection types"""
+    SSE = "sse"
+    STDIO = "stdio"

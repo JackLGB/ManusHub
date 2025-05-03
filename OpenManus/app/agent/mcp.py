@@ -3,10 +3,20 @@ from typing import Any, Dict, List, Optional, Tuple
 from pydantic import Field
 
 from OpenManus.app.agent.toolcall import ToolCallAgent
+from OpenManus.app.exceptions import (
+    McpServerUrlRequired,
+    McpServerCommandRequired,
+    McpUnsupportedConnectionType
+)
 from OpenManus.app.logger import logger
-from OpenManus.app.prompt.mcp import MULTIMEDIA_RESPONSE_PROMPT, NEXT_STEP_PROMPT, SYSTEM_PROMPT
-from OpenManus.app.schema.common import AgentState
+from OpenManus.app.prompt.mcp import (
+    MULTIMEDIA_RESPONSE_PROMPT,
+    NEXT_STEP_PROMPT,
+    SYSTEM_PROMPT
+)
+from OpenManus.app.schema.common import AgentState, McpConnType
 from OpenManus.app.schema.message import Message
+from OpenManus.app.tool import Terminate
 from OpenManus.app.tool.base import ToolResult
 from OpenManus.app.tool.mcp import MCPClients
 
@@ -29,14 +39,14 @@ class MCPAgent(ToolCallAgent):
     available_tools: MCPClients = None  # Will be set in initialize()
 
     max_steps: int = 20
-    connection_type: str = "stdio"  # "stdio" or "sse"
+    connection_type: str = McpConnType.STDIO  # "stdio" or "sse"
 
     # Track tool schemas to detect changes
     tool_schemas: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
     _refresh_tools_interval: int = 5  # Refresh tools every N steps
 
     # Special tool names that should trigger termination
-    special_tool_names: List[str] = Field(default_factory=lambda: ["terminate"])
+    special_tool_names: List[str] = Field(default_factory=lambda: [Terminate.name])
 
     async def initialize(
         self,
@@ -57,16 +67,7 @@ class MCPAgent(ToolCallAgent):
             self.connection_type = connection_type
 
         # Connect to the MCP server based on connection type
-        if self.connection_type == "sse":
-            if not server_url:
-                raise ValueError("Server URL is required for SSE connection")
-            await self.mcp_clients.connect_sse(server_url=server_url)
-        elif self.connection_type == "stdio":
-            if not command:
-                raise ValueError("Command is required for stdio connection")
-            await self.mcp_clients.connect_stdio(command=command, args=args or [])
-        else:
-            raise ValueError(f"Unsupported connection type: {self.connection_type}")
+        await self._connect_to_server(server_url, command, args)
 
         # Set available_tools to our MCP instance
         self.available_tools = self.mcp_clients
@@ -75,8 +76,7 @@ class MCPAgent(ToolCallAgent):
         await self._refresh_tools()
 
         # Add system message about available tools
-        tool_names = list(self.mcp_clients.tool_map.keys())
-        tools_info = ", ".join(tool_names)
+        tools_info = ", ".join(self.mcp_clients.tool_map.keys())
 
         # Add system prompt and available tools information
         self.memory.add_message(
@@ -84,6 +84,23 @@ class MCPAgent(ToolCallAgent):
                 f"{self.system_prompt}\n\nAvailable MCP tools: {tools_info}"
             )
         )
+
+    async def _connect_to_server(
+        self,
+        server_url: Optional[str],
+        command: Optional[str],
+        args: Optional[List[str]],
+    ) -> None:
+        if self.connection_type == McpConnType.SSE:
+            if not server_url:
+                raise McpServerUrlRequired
+            await self.mcp_clients.connect_sse(server_url=server_url)
+        elif self.connection_type == McpConnType.STDIO:
+            if not command:
+                raise McpServerCommandRequired
+            await self.mcp_clients.connect_stdio(command=command, args=args or [])
+        else:
+            raise McpUnsupportedConnectionType(self.connection_type)
 
     async def _refresh_tools(self) -> Tuple[List[str], List[str]]:
         """Refresh the list of available tools from the MCP server.
@@ -106,10 +123,10 @@ class MCPAgent(ToolCallAgent):
         removed_tools = list(previous_names - current_names)
 
         # Check for schema changes in existing tools
-        changed_tools = []
-        for name in current_names.intersection(previous_names):
-            if current_tools[name] != self.tool_schemas.get(name):
-                changed_tools.append(name)
+        changed_tools = [
+            name for name in set(current_tools) & set(self.tool_schemas)
+            if current_tools[name] != self.tool_schemas[name]
+        ]
 
         # Update stored schemas
         self.tool_schemas = current_tools
@@ -168,15 +185,13 @@ class MCPAgent(ToolCallAgent):
     def _should_finish_execution(self, name: str, **kwargs) -> bool:
         """Determine if tool execution should finish the agent"""
         # Terminate if the tool name is 'terminate'
-        return name.lower() == "terminate"
+        return name.lower() == Terminate.name
 
     async def cleanup(self) -> None:
         """Clean up MCP connection when done."""
-        if self.mcp_clients.sessions:
-            await self.mcp_clients.disconnect()
-            logger.info("MCP connection closed")
+        await self.mcp_clients.disconnect()
 
-    async def run(self, request: Optional[str] = None) -> str:
+    async def run(self, request: Optional[str] = None) -> Optional[str]:
         """Run the agent with cleanup when done."""
         try:
             result = await super().run(request)

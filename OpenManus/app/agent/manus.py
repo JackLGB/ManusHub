@@ -133,9 +133,10 @@ class Manus(ToolCallAgent):
         if self.browser_context_helper:
             await self.browser_context_helper.cleanup_browser()
         # Disconnect from all MCP servers only if we were initialized
-        if self._initialized:
-            await self.disconnect_mcp_server()
-            self._initialized = False
+        if not self._initialized:
+            return
+        await self.disconnect_mcp_server()
+        self._initialized = False
 
     async def think(self) -> bool:
         """Process current state and decide next actions with appropriate context."""

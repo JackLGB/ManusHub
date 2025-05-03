@@ -135,6 +135,8 @@ class MCPClients(ToolCollection):
 
     async def disconnect(self, server_id: str = "") -> None:
         """Disconnect from a specific MCP server or all servers if no server_id provided."""
+        if not self.sessions:
+            return
         if server_id:
             if server_id in self.sessions:
                 try:
