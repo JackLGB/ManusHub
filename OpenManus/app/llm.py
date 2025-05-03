@@ -22,7 +22,6 @@ from OpenManus.app.config import LLMSettings, config
 from OpenManus.app.exceptions import TokenLimitExceeded
 from OpenManus.app.logger import logger  # Assuming a logger is set up in your app
 from OpenManus.app.schema.common import (
-    ROLE_VALUES,
     TOOL_CHOICE_TYPE,
     TOOL_CHOICE_VALUES,
     ToolChoice,
